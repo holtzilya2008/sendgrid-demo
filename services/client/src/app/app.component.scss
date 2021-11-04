@@ -1,0 +1,23 @@
+.register-button {
+  display: block;
+  width: 200px;
+  height: 30px;
+}
+.conatiner{
+  display: flex;
+  flex-flow: column;
+  padding: 3rem;
+  align-items: center;
+  &__content{
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+  }
+}
+.availableDevice{
+  color:#1976d2;
+  font-weight: bold;
+}
+.btn-success{
+  margin: 0.5rem;
+}

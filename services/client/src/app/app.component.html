@@ -1,0 +1,38 @@
+
+<div class="conatiner">
+<h1>IOT System</h1>
+
+<input type="text" [(ngModel)]="deviceToRegister">
+<button class="btn btn-success"
+        type="button"
+        [disabled]="!deviceToRegister"
+        (click)="onRegister()">Register Device</button>
+
+<p>{{serverMessage}}</p>
+
+<div class="conatiner__content">
+  <ul *ngIf="availableDevices && availableDevices.length">
+    <h3> Available Devices </h3>
+    <li *ngFor="let device of availableDevices" class="availableDevice">{{ device }}</li>
+  </ul>
+  
+<div *ngIf="registerDevices && registerDevices.length">
+  <h3> Register Devices </h3>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Device Name</th>
+        <th scope="col">Device Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of registerDevices">
+        <td>{{item.deviceName}}</td>
+        <td>{{item.deviceDescription}}</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+</div>
+</div>

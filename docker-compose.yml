@@ -1,0 +1,13 @@
+version: '3'
+services:
+    mongo:
+        image: "mongo"
+        ports:
+            - "27017:27017"
+    client:
+        image: client
+        build: ./services/client
+        ports:
+          - '4200:4200' # Port mapping
+        command: >
+          bash -c "npm install && ng serve --host 0.0.0.0 --port 4200"
