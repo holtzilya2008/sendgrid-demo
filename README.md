@@ -1,1 +1,1 @@
-# sendgrid-demo
+# Email integration with SendGrid
