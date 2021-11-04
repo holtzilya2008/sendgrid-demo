@@ -11,3 +11,11 @@ services:
           - '4200:4200' # Port mapping
         command: >
           bash -c "npm install && ng serve --host 0.0.0.0 --port 4200"
+    registry:
+        image: db-accessor
+        build: ./services/db-accessor
+        command: node db-accessor.js
+        ports:
+            - "8002:8002"
+        depends_on:
+            - "mongo"
