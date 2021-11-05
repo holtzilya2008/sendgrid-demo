@@ -5,7 +5,7 @@ import { MessagesService } from '../services/messages.service';
 export class MessagesController {
   constructor(private readonly appService: MessagesService) {}
 
-  @Get()
+  @Get()  
   getHello(): string {
     return this.appService.getHello();
   }

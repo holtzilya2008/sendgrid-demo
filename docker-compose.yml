@@ -19,3 +19,10 @@ services:
             - "8002:8002"
         depends_on:
             - "mongo"
+    backend:
+        image: backend
+        build: ./services/backend
+        ports:
+          - '3001:3001' # Port mapping
+        command: >
+          bash -c "npm install && nest build && nest start"
