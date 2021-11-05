@@ -14,4 +14,4 @@ COPY . .
 EXPOSE 8002
 
 # run the service
-CMD ["node", "registry.js"]
+CMD ["node", "db-accessor.js"]

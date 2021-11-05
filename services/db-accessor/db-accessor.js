@@ -46,7 +46,7 @@ app.post(`/${messagesCollectionName}`,(req,res,next)=>{
             next(error);
         }
         else{
-            db.getDB().collection(collection).insertOne(userInput,(err,result)=>{
+            db.getDB().collection(messagesCollectionName).insertOne(userInput,(err,result)=>{
                 if(err){
                     const error = new Error("Failed to add message");
                     error.status = 400;
@@ -73,7 +73,7 @@ const userSchema = Joi.object().keys({
 
 // read
 app.get(`/${usersCollectionName}`,(req,res)=>{
-    db.getDB().collection(messagesCollectionName).find({}).toArray((err,documents)=>{
+    db.getDB().collection(usersCollectionName).find({}).toArray((err,documents)=>{
         if(err)
             console.log(err);
         else{
@@ -89,21 +89,21 @@ app.post(`/${usersCollectionName}`,(req,res,next)=>{
     console.log('Inserting a new user to DB');
     console.log(JSON.stringify(req.body));
 
-    Joi.validate(userInput,schema,(err,result)=>{
+    Joi.validate(userInput,userSchema,(err,result)=>{
         if(err){
             const error = new Error("Invalid Input");
             error.status = 400;
             next(error);
         }
         else{
-            db.getDB().collection(collection).insertOne(userInput,(err,result)=>{
+            db.getDB().collection(usersCollectionName).insertOne(userInput,(err,result)=>{
                 if(err){
                     const error = new Error("Failed to add user");
                     error.status = 400;
                     next(error);
                 }
                 else
-                    res.json({result : result, document : result.ops[0],msg : "Successfully added message!!!",error : null});
+                    res.json({result : result, document : result.ops[0],msg : "Successfully added user!!!",error : null});
             });
         }
     })

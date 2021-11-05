@@ -1,6 +1,6 @@
 const MongoClient = require("mongodb").MongoClient;
 const ObjectID = require('mongodb').ObjectID;
-const dbname = "registry-db";
+const dbname = "chat-db";
 const url = "mongodb://mongo:27017";
 const mongoOptions = {useNewUrlParser : true};
 
