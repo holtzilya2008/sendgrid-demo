@@ -25,4 +25,4 @@ services:
         ports:
           - '3001:3001' # Port mapping
         command: >
-          bash -c "npm install && nest build && nest start"
+          bash -c "nest start"
