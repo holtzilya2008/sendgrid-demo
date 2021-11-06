@@ -1,6 +1,6 @@
 
 export interface MessageDTO {
-    id: string;
+    _id: string;
     userId: string;
     content: string;
 }
