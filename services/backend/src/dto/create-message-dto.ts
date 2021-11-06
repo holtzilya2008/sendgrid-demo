@@ -1,4 +1,4 @@
-export interface AddMessageDTO {
+export interface CreateMessageDTO {
     userId: string;
     content: string;
 }

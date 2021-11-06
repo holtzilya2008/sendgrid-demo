@@ -4,7 +4,7 @@ import { AxiosResponse } from 'axios';
 import { firstValueFrom, map, tap } from 'rxjs';
 
 import { DB_ACCESSOR_URL } from 'src/constants';
-import { AddMessageDTO } from 'src/dto/add-message-dto';
+import { CreateMessageDTO } from 'src/dto/create-message-dto';
 import { MessageDTO } from 'src/dto/message-dto';
 
 @Injectable()
@@ -16,7 +16,7 @@ export class MessagesService {
 
   }
 
-  postMessage(message: AddMessageDTO): Promise<string> {
+  createMessage(message: CreateMessageDTO): Promise<string> {
     const observable = this.http.post(`${DB_ACCESSOR_URL}/${this.path}`, message).pipe(
       tap(response => console.log(response)),
       map((response: AxiosResponse<MessageDTO>) => response.data._id)
