@@ -8,7 +8,7 @@ export class MessagesController {
   constructor(private readonly messagesService: MessagesService) {}
 
   @Get()  
-  getMessages(): Observable<MessageDTO[]> {
-    return this.messagesService.getMessages();
+  async getMessages(): Promise<MessageDTO[]> {
+    return await this.messagesService.getMessages();
   }
 }
