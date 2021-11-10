@@ -1,13 +1,15 @@
 import { HttpService } from '@nestjs/axios';
 import { Injectable } from '@nestjs/common';
+import { OnEvent } from '@nestjs/event-emitter';
 import { AxiosResponse } from 'axios';
 import { firstValueFrom, map, tap } from 'rxjs';
 
 import { DB_ACCESSOR_URL, DOMAIN_NAME } from 'src/constants';
 import { CreateMessageDTO } from 'src/dto/create-message-dto';
-import { CreateMessageResponseDTO } from 'src/dto/create-message-response-dto';
 import { EmailDTO } from 'src/dto/email-dto';
 import { MessageDTO } from 'src/dto/message-dto';
+import { BackendEvents } from 'src/events/backend-events.enum';
+import { EmailParsedEvent } from 'src/events/email-parsed.event';
 import { EmailService } from './email.service';
 
 
@@ -54,6 +56,12 @@ export class MessagesService {
     const to = 'holtzilya2008@gmail.com';
     const email = this.toEmail(message, to);
     this.emailService.sendEmail(email);
+  }
+
+  @OnEvent(BackendEvents.EmailParsed)
+  private handleEmailParsed(payload: EmailParsedEvent) {
+    console.log(`Received Parsed email in message service`);
+    console.log(JSON.stringify(payload.email));
   }
 
 }
