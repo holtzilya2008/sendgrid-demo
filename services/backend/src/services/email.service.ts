@@ -28,6 +28,9 @@ export class EmailService {
     }
 
     parseEmail(inboundEmail: InboundEmailDto): void {
+        console.log('parseEmail');
+        console.log(inboundEmail);
+        // console.log(inboundEmail.text);
         const envelope = this.parseEnvelope(inboundEmail.envelope);
         const email: ParsedEmail = {
             from: envelope.from,
@@ -38,6 +41,7 @@ export class EmailService {
         console.log(JSON.stringify(email, null ,2));
     }
     
+
     
     private parseEnvelope(envelope: string): Envelope {
         return JSON.parse(envelope);
