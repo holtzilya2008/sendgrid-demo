@@ -75,7 +75,7 @@ export class MessagesService {
     const user = await this.userService.getUserByEmail(email.from);
     console.log(`user: \n ${JSON.stringify(user)}`);
     const message: CreateMessageDTO = {
-      userId: user.id,
+      userId: user._id,
       content: email.text
     }
     await this.createMessage(message);

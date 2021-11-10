@@ -31,17 +31,12 @@ export class EmailService {
     }
 
     parseEmail(inboundEmail: InboundEmailDto): void {
-        console.log('parseEmail');
-        console.log(inboundEmail);
-        // console.log(inboundEmail.text);
         const envelope = this.parseEnvelope(inboundEmail.envelope);
         const email: ParsedEmail = {
             from: envelope.from,
             to: envelope.to,
             text: inboundEmail.text ?? null,    
         };
-        console.log(`Inbound email was succesfully parsed!`);
-        console.log(JSON.stringify(email, null ,2));
         this.publishParsedEmailEvent(email);
     }
 
