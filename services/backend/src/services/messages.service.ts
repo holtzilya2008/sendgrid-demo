@@ -4,7 +4,7 @@ import { OnEvent } from '@nestjs/event-emitter';
 import { AxiosResponse } from 'axios';
 import { firstValueFrom, map, tap } from 'rxjs';
 
-import { DB_ACCESSOR_URL, DOMAIN_NAME } from 'src/constants';
+import { DB_ACCESSOR_URL, DOMAIN_NAME, SENDGRID_API_KEY } from 'src/constants';
 import { CreateMessageDTO } from 'src/dto/create-message-dto';
 import { CreateMessageResponseDTO } from 'src/dto/create-message-response-dto';
 import { EmailDTO } from 'src/dto/email-dto';
@@ -30,6 +30,9 @@ export class MessagesService {
   async createMessage(message: CreateMessageDTO): Promise<string> {
     console.log('MessagesService:createMessage');
     console.log(JSON.stringify(message,null,2));
+    console.log('Checking Env Variables');
+    console.log(DOMAIN_NAME);
+    console.log(SENDGRID_API_KEY);
 
     const observable = this.http.post(`${DB_ACCESSOR_URL}/${this.path}`, message).pipe(
       tap(response => console.log(response)),

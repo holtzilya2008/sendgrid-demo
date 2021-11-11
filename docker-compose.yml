@@ -22,6 +22,9 @@ services:
     backend:
         image: backend
         build: ./services/backend
+        environment: 
+          - DOMAIN_NAME
+          - SENDGRID_API_KEY
         ports:
           - '3001:3001' # Port mapping
         command: >
