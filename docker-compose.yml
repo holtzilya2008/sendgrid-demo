@@ -25,6 +25,7 @@ services:
         environment: 
           - DOMAIN_NAME
           - SENDGRID_API_KEY
+          - CHAT_NAME
         ports:
           - '3001:3001' # Port mapping
         command: >
