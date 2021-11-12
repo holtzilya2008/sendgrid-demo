@@ -4,6 +4,7 @@ import { takeUntil } from 'rxjs/operators';
 import { MessageDTO } from '../dto/message-dto';
 import { MessagesApiService } from './messages-api.service';
 import { isEqual } from 'lodash';
+import { CreateMessageDTO } from '../dto/create-message-dto';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,14 @@ export class MessagesService {
   messages$ = this.messages.asObservable();
 
   constructor(private api: MessagesApiService) { }
+
+  async createMessage(userId: string, content: string): Promise<void> {
+    const message: CreateMessageDTO = {
+      content,
+      userId
+    }
+    return await this.api.createMessage(message).toPromise();
+  }
 
   public refreshMessagesWithInterval(until: Observable<any>) {
     interval(100).pipe(

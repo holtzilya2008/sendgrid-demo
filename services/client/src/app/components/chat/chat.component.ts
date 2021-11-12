@@ -19,6 +19,7 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
   currentUser$: Observable<UserDTO>;
   messages$: Observable<MessageDTO[]>;
   private cleanUp$ = new Subject();
+  input: string;
 
   constructor(private messagesService: MessagesService,
               private usersService: UsersService) { }
@@ -42,6 +43,12 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
     const element: HTMLElement = (this.messagesContainer.nativeElement as HTMLElement);
     const maxScroll = element.scrollHeight;
     element.scrollTo(0, maxScroll);
+  }
+
+  sendMessage(): void {
+    const userId = this.usersService.getCurrentUser()._id;
+    this.messagesService.createMessage(userId, this.input);
+    this.input = '';
   }
 
   ngOnDestroy() {
