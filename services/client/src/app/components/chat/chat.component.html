@@ -1,0 +1,9 @@
+<div class="chat">
+  <h1>Backend Rulez Chat</h1>
+
+  <h2>Connected with: {{ currentUser$ | async | userName }}</h2>
+
+  <div class="chat__messages">
+    <app-message *ngFor="let message of messages$ | async" [message]="message" ></app-message>
+  </div>
+</div>
