@@ -11,7 +11,7 @@ export const UsersMock: UserDTO[] = [
     "_id": "32b12cd9-6174-4795-8ec5-336fb9e465e9",
     "nickName": "Amye",
     "email": "ahawke0@theglobeandmail.com",
-    "avatarUrl": "ilya-holtz.jpg"
+    "avatarUrl": "rick-avatar.png"
   }, {
     "_id": "659639e6-5627-46a6-a9e6-67804b1690ef",
     "nickName": "Mathian",

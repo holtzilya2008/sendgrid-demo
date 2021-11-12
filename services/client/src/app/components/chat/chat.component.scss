@@ -1,10 +1,38 @@
 
 .chat {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 
-  .chat__messages {
-    width: 500px;
+  &__messages {
+    width: 800px;
+    height: 700px;
+    overflow-y: auto;
   }
+
+  &__input {
+    margin-top: 24px;
+    width: 800px;
+    height: 100px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    &__field {
+      width: 80%;
+      height: 80%;
+
+      input{
+        width: 100%;
+      }
+    }
+
+    &__button {
+      width: 10%;
+      height: 50%;
+    }
+  }
+
 }

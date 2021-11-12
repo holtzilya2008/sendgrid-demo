@@ -23,6 +23,10 @@ export class UsersService {
     return this.users;
   }
 
+  getUserById(userId: string): UserDTO {
+      return this.users.find(u => u._id === userId) ?? this.users[0];
+  }
+
   getCurrentUser(): UserDTO {
     return this.currentUser.value;
   }

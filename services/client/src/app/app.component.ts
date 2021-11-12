@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService, RegisteredDevicesResponse } from './api.service'
+import { UsersService } from './services/users.service';
 
 @Component({
   selector: 'app-root',
@@ -7,39 +8,13 @@ import { ApiService, RegisteredDevicesResponse } from './api.service'
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  availableDevices: string[];
-  deviceToRegister: string;
-  serverMessage: string = '';
-  registerDevices:RegisteredDevicesResponse[]=[];
 
-  constructor(private api: ApiService) {
+  constructor(private usersService: UsersService) {
 
   }
 
   ngOnInit() {
-    this.getAvailableDeviceNames();
-    this.getRegisterDevices();
-  }
-
-  private getAvailableDeviceNames(){
-    this.api.getAvailableDeviceNames().subscribe((devices) => {
-      this.availableDevices = devices;
-    });
-  }
-
-  private getRegisterDevices(){
-    this.api.getRegisteredDevices().subscribe((devices) => {
-      this.registerDevices = devices;
-    });
-  }
-
-  onRegister(): void {
-    this.api.registerDevice(this.deviceToRegister).subscribe(() => {
-      this.serverMessage = `Device ${this.deviceToRegister} is registered!`;
-      this.deviceToRegister = null;
-      this.getAvailableDeviceNames();
-      this.getRegisterDevices();
-    });
+    this.usersService.initUsers();
   }
 
 }

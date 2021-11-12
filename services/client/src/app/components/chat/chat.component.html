@@ -3,7 +3,12 @@
 
   <h2>Connected with: {{ currentUser$ | async | userName }}</h2>
 
-  <div class="chat__messages">
+  <div #messagesContainer class="chat__messages">
     <app-message *ngFor="let message of messages$ | async" [message]="message" ></app-message>
+  </div>
+
+  <div class="chat__input">
+    <input class="chat__input__field" type="text">
+    <button class="chat__input__button">SEND</button>
   </div>
 </div>

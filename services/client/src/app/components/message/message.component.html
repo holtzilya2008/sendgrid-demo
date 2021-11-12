@@ -1,1 +1,9 @@
-<p>{{ message.content }}</p>
+
+<div class="message">
+  <div class="message__user">
+    <h5>{{message.userId | user | userName }}</h5>
+    <img class="message__user__avatar" [src]="message.userId | user | avatar" alt="avatar">
+  </div>
+  <div class="message__content"><p>{{ message.content }}</p></div>
+</div>
+
