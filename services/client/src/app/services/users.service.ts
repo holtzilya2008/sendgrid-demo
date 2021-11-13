@@ -17,8 +17,6 @@ export class UsersService {
 
   async initUsers(): Promise<void> {
     this.users = await this.api.getUsers().toPromise();
-    const loginAs = this.users.find(u => u.email === 'holtzilya2008@gmail.com');
-    this.currentUser.next(loginAs);
   }
 
   getUsers(): UserDTO[] {
@@ -27,6 +25,22 @@ export class UsersService {
 
   getUserById(userId: string): UserDTO {
       return this.users.find(u => u._id === userId);
+  }
+
+  private getUserByEmail(email: string): UserDTO {
+    return this.users.find(u => u.email === email);
+  }
+
+  tryLogin(email: string): boolean {
+    if (!email) {
+      return false;
+    }
+    const user = this.getUserByEmail(email);
+    if (!user) {
+      return false;
+    }
+    this.currentUser.next(user);
+    return true;
   }
 
   getCurrentUser(): UserDTO {

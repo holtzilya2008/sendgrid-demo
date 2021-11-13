@@ -1,4 +1,5 @@
 import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable, Subject } from 'rxjs';
 import { debounceTime, takeUntil } from 'rxjs/operators';
 import { MessageDTO } from 'src/app/dto/message-dto';
@@ -22,7 +23,8 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
   input: string;
 
   constructor(private messagesService: MessagesService,
-              private usersService: UsersService) { }
+              private usersService: UsersService,
+              private router: Router) { }
 
   ngAfterViewInit(): void {
     this.messages$.pipe(
@@ -34,6 +36,9 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngOnInit(): void {
+    if (!this.usersService.getCurrentUser()) {
+      this.router.navigate(['login']);
+    }
     this.currentUser$= this.usersService.currentUser$;
     this.messages$ = this.messagesService.messages$;
     this.messagesService.refreshMessagesWithInterval(this.cleanUp$.asObservable())

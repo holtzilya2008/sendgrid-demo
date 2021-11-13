@@ -9,6 +9,7 @@ import { LoginComponent } from './components/login/login.component';
 import { UserPipe } from './pipes/user.pipe';
 import { AvatarPipe } from './pipes/avatar.pipe';
 import { UserNamePipe } from './pipes/user-name.pipe';
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { UserNamePipe } from './pipes/user-name.pipe';
   imports: [
     BrowserModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
