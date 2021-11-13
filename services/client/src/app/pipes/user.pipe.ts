@@ -12,7 +12,6 @@ export class UserPipe implements PipeTransform {
   }
 
   transform(userId: string): UserDTO {
-    console.log(userId);
     return this.usersService.getUserById(userId);
   }
 
