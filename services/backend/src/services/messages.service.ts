@@ -29,7 +29,7 @@ export class MessagesService {
 
   }
 
-  async createMessage(message: CreateMessageDTO): Promise<string> {
+  async createMessage(message: CreateMessageDTO): Promise<MessageDTO> {
     console.log('MessagesService:createMessage');
     console.log(JSON.stringify(message,null,2));
 
@@ -37,7 +37,6 @@ export class MessagesService {
       tap(response => console.log(response)),
       map((response: AxiosResponse<CreateMessageResponseDTO>) => response.data.document),
       tap(message => this.sendEmailToChatGroup(message)),
-      map(message => message._id)
     );
     return firstValueFrom(observable);
   }

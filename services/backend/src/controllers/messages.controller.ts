@@ -13,7 +13,7 @@ export class MessagesController {
   }
 
   @Post()
-  async createMessage(@Body() message: CreateMessageDTO): Promise<string> {
+  async createMessage(@Body() message: CreateMessageDTO): Promise<MessageDTO> {
     return await this.messagesService.createMessage(message);
   }
 
