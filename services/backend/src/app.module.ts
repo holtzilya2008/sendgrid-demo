@@ -6,6 +6,7 @@ import { EmailService } from './services/email.service';
 import { InboundEmailController } from './controllers/inbound-email.controller';
 import { EventEmitterModule } from '@nestjs/event-emitter';
 import { UserService } from './services/user.service';
+import { UsersController } from './controllers/users.controller';
 
 const eventEmitterOpts = {
   // set this to `true` to use wildcards
@@ -26,7 +27,7 @@ const eventEmitterOpts = {
 
 @Module({
   imports: [HttpModule, EventEmitterModule.forRoot(eventEmitterOpts)],
-  controllers: [MessagesController, InboundEmailController],
+  controllers: [MessagesController, InboundEmailController, UsersController],
   providers: [MessagesService, EmailService, UserService],
 })
 export class AppModule {}
