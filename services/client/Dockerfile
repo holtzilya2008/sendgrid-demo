@@ -1,4 +1,4 @@
-FROM node
+FROM node:16.13
 
 # make a directory for the service
 WORKDIR /app

@@ -25,7 +25,7 @@ export class MessagesService {
   }
 
   public refreshMessagesWithInterval(until: Observable<any>) {
-    interval(100).pipe(
+    interval(1000).pipe(
       takeUntil(until)
     ).subscribe(() => {
       this.refreshMessages();
