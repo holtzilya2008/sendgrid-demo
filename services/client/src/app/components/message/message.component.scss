@@ -10,16 +10,18 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 25%;
+    width: 15%;
 
     &__avatar {
       max-height: 64px;
       max-width: 64px;
       margin: 8px;
+      border-radius: 50%;
     }
   }
 
   &__content{
-    max-width: 70%;
+    padding: 25px;
+    max-width: 84%;
   }
 }
