@@ -5,9 +5,15 @@ WORKDIR /app
 
 # install dependencies
 RUN npm install -g @angular/cli
+COPY package.json .
+RUN npm install
 
 # copy source code
 COPY . .
+RUN nest build
+
+# expose port
+EXPOSE 4200
 
 # run the service
 CMD ["npm", "start"]

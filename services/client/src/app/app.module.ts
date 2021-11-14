@@ -51,10 +51,10 @@ const config: SocketIoConfig = { url: environment.backendUrl, options: {} };
     MatAutocompleteModule
   ],
   providers: [
-    { provide: UsersService, useClass: UsersMockService },
-    { provide: MessagesService, useClass: MessagesMockService }
-    // UsersService,
-    // MessagesService
+    // { provide: UsersService, useClass: UsersMockService },
+    // { provide: MessagesService, useClass: MessagesMockService }
+    UsersService,
+    MessagesService
   ],
   bootstrap: [AppComponent]
 })
