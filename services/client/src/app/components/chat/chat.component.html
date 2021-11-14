@@ -4,11 +4,20 @@
   <h2>Connected with: {{ currentUser$ | async | userName }}</h2>
 
   <div #messagesContainer class="chat__messages">
-    <app-message *ngFor="let message of messages$ | async" [message]="message" ></app-message>
+    <mat-chip-list>
+      <app-message *ngFor="let message of messages$ | async" [message]="message" ></app-message>
+    </mat-chip-list>
   </div>
 
   <div class="chat__input">
-    <input  [(ngModel)]="input" class="chat__input__field" type="text">
-    <button (click)="sendMessage()" class="chat__input__button">SEND</button>
+    <mat-form-field class="example-full-width chat__input__field" appearance="fill">
+      <mat-label>Whats on your mind?</mat-label>
+      <textarea [(ngModel)]="input" matInput placeholder="Lets get shwifty..."></textarea>
+    </mat-form-field>
+    <div class="chat__input__send">
+      <button (click)="sendMessage()" mat-fab color="primary" aria-label="Send Message">
+        <mat-icon>send</mat-icon>
+      </button>
+    </div>
   </div>
 </div>

@@ -16,6 +16,11 @@ import { UsersService } from './services/users.service';
 import { UsersMockService } from './mocks/user-mock.service';
 import { MessagesService } from './services/messages.service';
 import { MessagesMockService } from './mocks/messages-mock.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import {MatIconModule} from '@angular/material/icon';
+import { MatChipsModule } from '@angular/material/chips';
 
 const config: SocketIoConfig = { url: environment.backendUrl, options: {} };
 
@@ -34,7 +39,12 @@ const config: SocketIoConfig = { url: environment.backendUrl, options: {} };
     HttpClientModule,
     FormsModule,
     AppRoutingModule,
-    SocketIoModule.forRoot(config)
+    SocketIoModule.forRoot(config),
+    BrowserAnimationsModule,
+    MatInputModule,
+    MatButtonModule,
+    MatIconModule,
+    MatChipsModule
   ],
   providers: [
     { provide: UsersService, useClass: UsersMockService },

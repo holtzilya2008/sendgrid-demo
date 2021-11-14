@@ -7,32 +7,35 @@
 
   &__messages {
     width: 800px;
-    height: 700px;
+    height: 500px;
     overflow-y: auto;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
   }
 
   &__input {
     margin-top: 24px;
     width: 800px;
-    height: 100px;
+    height: 150px;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
 
     &__field {
       width: 80%;
-      height: 80%;
-
-      input{
-        width: 100%;
-      }
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
 
-    &__button {
-      width: 10%;
-      height: 50%;
+    &__send {
+      padding-left: 24px;
+      padding-bottom: 16px;
     }
+
   }
 
 }
