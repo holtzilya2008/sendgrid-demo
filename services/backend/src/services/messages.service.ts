@@ -35,6 +35,9 @@ export class MessagesService {
   async createMessage(message: CreateMessageDTO): Promise<MessageDTO> {
     console.log('MessagesService:createMessage');
     console.log(JSON.stringify(message,null,2));
+    if(!message.content) {
+      throw new Error('Empty message is not allowed');
+    }
 
     const observable = this.http.post(`${DB_ACCESSOR_URL}/${this.path}`, message).pipe(
       tap(() => this.publishMessagesList()),

@@ -9,7 +9,7 @@ import { Logger } from '@nestjs/common';
 import { Socket, Server } from 'socket.io';
 import { SocketChannel } from './types/socket-channels-enum';
  
- @WebSocketGateway()
+ @WebSocketGateway({ cors: { origin: [ 'http://localhost:4200', 'http://client:4200' ] } })
  export class AppGateway implements OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect {
  
   @WebSocketServer() server: Server;
