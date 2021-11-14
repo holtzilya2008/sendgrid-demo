@@ -5,6 +5,8 @@ import { MessageDTO } from '../dto/message-dto';
 import { MessagesApiService } from './messages-api.service';
 import { isEqual } from 'lodash';
 import { CreateMessageDTO } from '../dto/create-message-dto';
+import { SocketService } from './socket.service';
+import { SocketChannel } from '../types/socket-channels-enum';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +16,8 @@ export class MessagesService {
   private messages = new BehaviorSubject<MessageDTO[]>([]);
   messages$ = this.messages.asObservable();
 
-  constructor(private api: MessagesApiService) { }
+  constructor(private api: MessagesApiService,
+              private socketService: SocketService) { }
 
   async createMessage(userId: string, content: string): Promise<void> {
     const message: CreateMessageDTO = {
@@ -24,18 +27,20 @@ export class MessagesService {
     return await this.api.createMessage(message).toPromise();
   }
 
-  public refreshMessagesWithInterval(until: Observable<any>) {
-    interval(1000).pipe(
+  public listenToNewMessages(until: Observable<any>) {
+    this.socketService.listen<MessageDTO[]>(SocketChannel.MessagesUpdated).pipe(
       takeUntil(until)
-    ).subscribe(() => {
-      this.refreshMessages();
+    ).subscribe((messagesList) => {
+      if (!isEqual(messagesList, this.messages.value)) {
+        this.messages.next(messagesList);
+      }
     });
     until.subscribe(() => {
       this.messages.next([]);
     });
   }
 
-  private refreshMessages(): void {
+  public refreshMessages(): void {
     this.api.getMessages().subscribe(messages => {
       if (!isEqual(messages, this.messages.value)) {
         this.messages.next(messages);
