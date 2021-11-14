@@ -1,5 +1,4 @@
 import {
-  SubscribeMessage,
   WebSocketGateway,
   OnGatewayInit,
   WebSocketServer,
@@ -8,6 +7,7 @@ import {
  } from '@nestjs/websockets';
 import { Logger } from '@nestjs/common';
 import { Socket, Server } from 'socket.io';
+import { SocketChannel } from './types/socket-channels-enum';
  
  @WebSocketGateway()
  export class AppGateway implements OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect {
@@ -15,11 +15,11 @@ import { Socket, Server } from 'socket.io';
   @WebSocketServer() server: Server;
   private logger: Logger = new Logger('AppGateway');
  
-  @SubscribeMessage('msgToServer')
-  handleMessage(client: Socket, payload: string): void {
-   this.server.emit('msgToClient', payload);
+  publish<T>(channel: SocketChannel, payload: T): void {
+    const stringifiedPayload = JSON.stringify(payload);
+    this.server.emit<string>(channel, stringifiedPayload);
   }
- 
+
   afterInit(server: Server) {
    this.logger.log('Init');
   }

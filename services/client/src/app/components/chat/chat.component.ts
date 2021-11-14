@@ -41,7 +41,8 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
     }
     this.currentUser$= this.usersService.currentUser$;
     this.messages$ = this.messagesService.messages$;
-    this.messagesService.refreshMessagesWithInterval(this.cleanUp$.asObservable())
+    this.messagesService.refreshMessages();
+    this.messagesService.listenToNewMessages(this.cleanUp$.asObservable())
   }
 
   private scrollToBottom() {

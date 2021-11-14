@@ -4,6 +4,7 @@ import { OnEvent } from '@nestjs/event-emitter';
 import { EmailData } from '@sendgrid/helpers/classes/email-address';
 import { AxiosResponse } from 'axios';
 import { firstValueFrom, map, tap } from 'rxjs';
+import { AppGateway } from 'src/app.gateway';
 
 import { CHAT_NAME, DB_ACCESSOR_URL, DOMAIN_NAME, SENDGRID_API_KEY } from 'src/constants';
 import { CreateMessageDTO } from 'src/dto/create-message-dto';
@@ -14,6 +15,7 @@ import { UserDTO } from 'src/dto/user-dto';
 import { BackendEvents } from 'src/events/backend-events.enum';
 import { EmailParsedEvent } from 'src/events/email-parsed.event';
 import { ParsedEmail } from 'src/types/parsed-email';
+import { SocketChannel } from 'src/types/socket-channels-enum';
 import { EmailService } from './email.service';
 import { UserService } from './user.service';
 
@@ -25,7 +27,8 @@ export class MessagesService {
 
   constructor(private http: HttpService, 
               private emailService: EmailService,
-              private userService: UserService) {
+              private userService: UserService,
+              private socketGateway: AppGateway) {
 
   }
 
@@ -34,11 +37,16 @@ export class MessagesService {
     console.log(JSON.stringify(message,null,2));
 
     const observable = this.http.post(`${DB_ACCESSOR_URL}/${this.path}`, message).pipe(
-      tap(response => console.log(response)),
+      tap(() => this.publishMessagesList()),
       map((response: AxiosResponse<CreateMessageResponseDTO>) => response.data.document),
       tap(message => this.sendEmailToChatGroup(message)),
     );
     return firstValueFrom(observable);
+  }
+
+  private async publishMessagesList(): Promise<void> {
+    const messages = await this.getMessages();
+    this.socketGateway.publish<MessageDTO[]>(SocketChannel.MessagesUpdated ,messages);
   }
 
   getMessages(): Promise<MessageDTO[]> {
