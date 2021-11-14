@@ -10,7 +10,7 @@ RUN npm install
 
 # copy source code
 COPY . .
-RUN nest build
+RUN ng build
 
 # expose port
 EXPOSE 4200
