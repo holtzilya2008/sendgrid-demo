@@ -1,19 +1,19 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { UserDTO } from '../dto/user-dto';
-import { UsersMock } from '../mocks/users-mock';
-import { UsersApiService } from './users-api.service';
+import { UsersMock } from './users-mock';
 
-export class UsersService {
+export class UsersMockService {
 
   private users: UserDTO[];
   private currentUser = new BehaviorSubject<UserDTO>(null);
   currentUser$ = this.currentUser.asObservable();
 
-  constructor(private api: UsersApiService) { }
+  constructor() { }
 
   async initUsers(): Promise<void> {
-    this.users = await this.api.getUsers().toPromise();
+    this.users = UsersMock;
+    return Promise.resolve();
   }
 
   getUsers(): UserDTO[] {
@@ -43,6 +43,5 @@ export class UsersService {
   getCurrentUser(): UserDTO {
     return this.currentUser.value;
   }
-
 
 }

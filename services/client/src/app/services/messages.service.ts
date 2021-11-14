@@ -8,9 +8,6 @@ import { CreateMessageDTO } from '../dto/create-message-dto';
 import { SocketService } from './socket.service';
 import { SocketChannel } from '../types/socket-channels-enum';
 
-@Injectable({
-  providedIn: 'root'
-})
 export class MessagesService {
 
   private messages = new BehaviorSubject<MessageDTO[]>([]);

@@ -12,6 +12,10 @@ import { UserNamePipe } from './pipes/user-name.pipe';
 import { AppRoutingModule } from './app-routing.module';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { environment } from 'src/environments/environment';
+import { UsersService } from './services/users.service';
+import { UsersMockService } from './mocks/user-mock.service';
+import { MessagesService } from './services/messages.service';
+import { MessagesMockService } from './mocks/messages-mock.service';
 
 const config: SocketIoConfig = { url: environment.backendUrl, options: {} };
 
@@ -32,7 +36,12 @@ const config: SocketIoConfig = { url: environment.backendUrl, options: {} };
     AppRoutingModule,
     SocketIoModule.forRoot(config)
   ],
-  providers: [],
+  providers: [
+    { provide: UsersService, useClass: UsersMockService }
+    { provide: MessagesService, useClass: MessagesMockService },
+    // UsersService,
+    // MessagesService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
