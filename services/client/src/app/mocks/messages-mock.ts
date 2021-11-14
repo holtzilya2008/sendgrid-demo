@@ -34,7 +34,7 @@ export const MessagesMock: MessageDTO[] = [{
   "userId": "10ab4907-6a03-4771-b968-ae71f0e4639e"
 }, {
   "_id": "7b15b163-1fb9-40fe-b434-62033957e705",
-  "content": "consectetuer adipiscing elit proin risus praesent lectus vestibulum quam sapien varius ut blandit non interdum in ante vestibulum ante ipsum primis in faucibus orci",
+  "content": "small message",
   "userId": "659639e6-5627-46a6-a9e6-67804b1690ef"
 }, {
   "_id": "75177bc9-b271-4db7-b95e-01366dfa042f",

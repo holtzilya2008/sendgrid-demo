@@ -10,11 +10,13 @@ import { UsersService } from 'src/app/services/users.service';
 export class LoginComponent implements OnInit {
 
   email: string;
+  availableEmails: string[];
 
   constructor(private userService: UsersService,
               private router: Router) { }
 
   ngOnInit(): void {
+    this.availableEmails = this.userService.getUsers().map(u => u.email);
   }
 
   login() {

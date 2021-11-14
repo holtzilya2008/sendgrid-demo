@@ -21,6 +21,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import { MatChipsModule } from '@angular/material/chips';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
 const config: SocketIoConfig = { url: environment.backendUrl, options: {} };
 
@@ -44,7 +46,9 @@ const config: SocketIoConfig = { url: environment.backendUrl, options: {} };
     MatInputModule,
     MatButtonModule,
     MatIconModule,
-    MatChipsModule
+    MatChipsModule,
+    MatToolbarModule,
+    MatAutocompleteModule
   ],
   providers: [
     { provide: UsersService, useClass: UsersMockService },

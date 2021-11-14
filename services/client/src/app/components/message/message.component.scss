@@ -1,8 +1,7 @@
 .message {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
-  align-items: flex-start;
+  align-items: center;
   margin-bottom: 16px;
 
   &__user {
@@ -10,7 +9,6 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 15%;
 
     &__avatar {
       max-height: 64px;
@@ -21,7 +19,13 @@
   }
 
   &__content{
-    padding: 25px;
+    padding-left: 16px;
     max-width: 84%;
+
+    &__chip {
+      width: fit-content;
+      height: fit-content;
+    }
+
   }
 }

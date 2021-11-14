@@ -1,7 +1,16 @@
-<div class="chat">
-  <h1>Backend Rulez Chat</h1>
 
-  <h2>Connected with: {{ currentUser$ | async | userName }}</h2>
+
+<div class="chat">
+
+  <p class="chat-toolbar">
+    <mat-toolbar>
+    <span>Backend Rulez Chat</span>
+    <span class="chat-toolbar__spacer"></span>
+    <span>Connected with: </span>
+    <img class="chat-toolbar__current-avatar" [src]="currentUser$ | async | avatar" alt="avatar">
+    <span>{{currentUser$ | async | userName }}</span>
+  </mat-toolbar>
+  </p>
 
   <div #messagesContainer class="chat__messages">
     <mat-chip-list>
