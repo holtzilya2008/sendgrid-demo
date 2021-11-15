@@ -5,9 +5,11 @@
     <img class="message__user__avatar" [src]="message.userId | user | avatar" alt="avatar">
   </div>
   <div class="message__content">
-    <mat-chip class="message__content__chip">
-      <p>{{ message.content }}</p>
-    </mat-chip>
+    <mat-chip-list>
+      <mat-chip class="message__content__chip">
+        <p>{{ message.content }}</p>
+      </mat-chip>
+    </mat-chip-list>
   </div>
 </div>
 
