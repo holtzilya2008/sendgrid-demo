@@ -12,19 +12,12 @@ export class LoginComponent implements OnInit {
 
   email: string;
   availableEmails: string[];
-  isInitialized = false;
 
   constructor(private userService: UsersService,
               private router: Router) { }
 
   ngOnInit(): void {
-    this.userService.isInitialized$.pipe(
-      filter(value => !!value),
-      take(1)
-    ).subscribe((isInitialized) => {
-      this.isInitialized = isInitialized;
-      this.availableEmails = this.userService.getUsers().map(u => u.email);
-    });
+    this.availableEmails = this.userService.getUsers().map(u => u.email);
   }
 
   login() {
