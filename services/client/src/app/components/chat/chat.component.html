@@ -13,9 +13,7 @@
   </p>
 
   <div #messagesContainer class="chat__messages">
-    <mat-chip-list>
       <app-message *ngFor="let message of messages$ | async" [message]="message" ></app-message>
-    </mat-chip-list>
   </div>
 
   <div class="chat__input">
