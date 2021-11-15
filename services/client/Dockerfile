@@ -9,5 +9,12 @@ RUN npm install -g @angular/cli
 # copy source code
 COPY . .
 
+# build
+RUN npm install
+RUN ng build
+
+# expose port
+EXPOSE 4200
+
 # run the service
 CMD ["npm", "start"]

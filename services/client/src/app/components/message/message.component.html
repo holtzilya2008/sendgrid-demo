@@ -1,9 +1,13 @@
 
 <div class="message">
   <div class="message__user">
-    <h5>{{message.userId | user | userName }}</h5>
+    <mat-label>{{message.userId | user | userName }}</mat-label>
     <img class="message__user__avatar" [src]="message.userId | user | avatar" alt="avatar">
   </div>
-  <div class="message__content"><p>{{ message.content }}</p></div>
+  <div class="message__content">
+    <mat-chip class="message__content__chip">
+      <p>{{ message.content }}</p>
+    </mat-chip>
+  </div>
 </div>
 

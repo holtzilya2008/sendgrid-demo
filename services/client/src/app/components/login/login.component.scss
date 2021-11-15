@@ -3,18 +3,25 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  height: 100vh;
 
-  &__box {
-    height: 400px;
-    width: 600px;
-    padding: 24px;
-    border: 1px solid black;
+  &__controls{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
 
-    &__controls {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      align-items: flex-start;
+    &__input {
+      width: 300px;
+    }
+
+    &__button {
+      margin-left: 24px;
+      margin-bottom: 18px;
     }
   }
+
+
+
+
 }

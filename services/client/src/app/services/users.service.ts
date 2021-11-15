@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { UserDTO } from '../dto/user-dto';
-import { UsersMock } from '../mocks/users-mock';
 import { UsersApiService } from './users-api.service';
 
+@Injectable()
 export class UsersService {
 
+  private isInitialized = new BehaviorSubject<boolean>(false);
+  isInitialized$ = this.isInitialized.asObservable();
   private users: UserDTO[];
   private currentUser = new BehaviorSubject<UserDTO>(null);
   currentUser$ = this.currentUser.asObservable();
@@ -14,6 +16,7 @@ export class UsersService {
 
   async initUsers(): Promise<void> {
     this.users = await this.api.getUsers().toPromise();
+    this.isInitialized.next(true);
   }
 
   getUsers(): UserDTO[] {
