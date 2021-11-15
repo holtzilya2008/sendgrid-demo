@@ -6,9 +6,7 @@ import { EmailService } from 'src/services/email.service';
 @Controller('inbound-email')
 export class InboundEmailController {
 
-    constructor(private emailService: EmailService) {
-        
-    }
+    constructor(private emailService: EmailService) { }
 
     @Post()
     @HttpCode(200)

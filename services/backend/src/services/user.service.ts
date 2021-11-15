@@ -21,7 +21,6 @@ export class UserService {
 
     async getUsers(): Promise<UserDTO[]> {
         const observable = this.http.get(`${DB_ACCESSOR_URL}/${this.path}`).pipe(
-            tap(response => console.log(response)),
             map((response: AxiosResponse<UserDTO[]>) => response.data)
         );
         return firstValueFrom(observable);

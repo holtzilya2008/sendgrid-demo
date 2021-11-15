@@ -5,9 +5,7 @@ import { UserService } from 'src/services/user.service';
 @Controller('users')
 export class UsersController {
 
-    constructor(private userService: UserService) {
-
-    }
+    constructor(private userService: UserService) { }
 
     @Get()
     async getUsers(): Promise<UserDTO[]> {
