@@ -5,11 +5,12 @@ WORKDIR /app
 
 # install dependencies
 RUN npm install -g @angular/cli
-COPY package.json .
-RUN npm install
 
 # copy source code
 COPY . .
+
+# build
+RUN npm install
 RUN ng build
 
 # expose port

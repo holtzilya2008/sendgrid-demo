@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { filter, take } from 'rxjs/operators';
 import { UsersService } from 'src/app/services/users.service';
 
 @Component({
@@ -11,12 +12,19 @@ export class LoginComponent implements OnInit {
 
   email: string;
   availableEmails: string[];
+  isInitialized = false;
 
   constructor(private userService: UsersService,
               private router: Router) { }
 
   ngOnInit(): void {
-    this.availableEmails = this.userService.getUsers().map(u => u.email);
+    this.userService.isInitialized$.pipe(
+      filter(value => !!value),
+      take(1)
+    ).subscribe((isInitialized) => {
+      this.isInitialized = isInitialized;
+      this.availableEmails = this.userService.getUsers().map(u => u.email);
+    });
   }
 
   login() {
@@ -28,3 +36,7 @@ export class LoginComponent implements OnInit {
   }
 
 }
+function subscribe(arg0: () => void) {
+  throw new Error('Function not implemented.');
+}
+
