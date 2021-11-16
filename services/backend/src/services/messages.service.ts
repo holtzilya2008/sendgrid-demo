@@ -33,8 +33,6 @@ export class MessagesService {
   }
 
   async createMessage(message: CreateMessageDTO): Promise<MessageDTO> {
-    console.log('MessagesService:createMessage');
-    console.log(JSON.stringify(message,null,2));
     if(!message.content) {
       throw new Error('Empty message is not allowed');
     }
