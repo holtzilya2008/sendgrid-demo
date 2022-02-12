@@ -2,11 +2,40 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { filter, take } from 'rxjs/operators';
 import { UsersService } from 'src/app/services/users.service';
+import {
+  trigger,
+  state,
+  style,
+  animate,
+  transition,
+  // ...
+} from '@angular/animations';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
+  animations: [
+    trigger('openClose', [
+      // ...
+      state('open', style({
+        height: '200px',
+        opacity: 1,
+        backgroundColor: 'yellow'
+      })),
+      state('closed', style({
+        height: '100px',
+        opacity: 0.8,
+        backgroundColor: 'blue'
+      })),
+      transition('open => closed', [
+        animate('1s')
+      ]),
+      transition('closed => open', [
+        animate('0.5s')
+      ]),
+    ]),
+  ]
 })
 export class LoginComponent implements OnInit {
 
@@ -35,12 +64,10 @@ export class LoginComponent implements OnInit {
     // if (loginSuccess) {
     //   this.router.navigate(['chat']);
     // }
-
-
   }
 
-}
-function subscribe(arg0: () => void) {
-  throw new Error('Function not implemented.');
-}
+    toggle() {
+      this.collapsed = !this.collapsed;
+    }
 
+}
