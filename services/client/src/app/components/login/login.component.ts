@@ -10,6 +10,8 @@ import { UsersService } from 'src/app/services/users.service';
 })
 export class LoginComponent implements OnInit {
 
+  collapsed = false;
+
   email: string;
   availableEmails: string[];
   isInitialized = false;
@@ -18,21 +20,23 @@ export class LoginComponent implements OnInit {
               private router: Router) { }
 
   ngOnInit(): void {
-    this.userService.isInitialized$.pipe(
-      filter(value => !!value),
-      take(1)
-    ).subscribe((isInitialized) => {
-      this.isInitialized = isInitialized;
-      this.availableEmails = this.userService.getUsers().map(u => u.email);
-    });
+    // this.userService.isInitialized$.pipe(
+    //   filter(value => !!value),
+    //   take(1)
+    // ).subscribe((isInitialized) => {
+    //   this.isInitialized = isInitialized;
+    //   this.availableEmails = this.userService.getUsers().map(u => u.email);
+    // });
   }
 
   login() {
-    const loginSuccess = this.userService.tryLogin(this.email);
-    this.email = '';
-    if (loginSuccess) {
-      this.router.navigate(['chat']);
-    }
+    // const loginSuccess = this.userService.tryLogin(this.email);
+    // this.email = '';
+    // if (loginSuccess) {
+    //   this.router.navigate(['chat']);
+    // }
+
+
   }
 
 }
