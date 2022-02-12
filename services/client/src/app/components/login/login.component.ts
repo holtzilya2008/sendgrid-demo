@@ -8,6 +8,7 @@ import {
   style,
   animate,
   transition,
+  sequence,
   // ...
 } from '@angular/animations';
 
@@ -20,18 +21,31 @@ import {
       // ...
       state('open', style({
         width: '600px',
+        height: '500px',
         opacity: 1,
         backgroundColor: 'Red'
       })),
       state('closed', style({
         width: '45px',
-        opacity: 0.8,
+        height: '60px',
+        opacity: 0.8
       })),
       transition('open => closed', [
-        animate('1s')
+          animate('2s')
       ]),
       transition('closed => open', [
-        animate('0.5s')
+        sequence([
+          animate('1s', style({
+            width: '600px',
+            opacity: 0.9,
+            backgroundColor: 'grey'
+          })),
+          animate('1s', style({
+            height: '500px',
+            opacity: 1,
+            backgroundColor: 'red'
+          }))
+        ]),
       ]),
     ]),
   ]
