@@ -27,7 +27,27 @@
     }
   }
 
+  &__overlay {
+    position: absolute;
+    height: 100vh;
+    width: 100%;
+    z-index: 1000;
+    background-color: black;
+    opacity: 0.5;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 
+    &__modal {
+      position: absolute;
+      height: 500px;
+      width: 700px;
+      z-index: 10000;
+      background-color: white;
+      opacity: 1;
+    }
+  }
 
 
 }

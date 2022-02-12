@@ -9,6 +9,7 @@ import {
   animate,
   transition,
   sequence,
+  AnimationEvent
   // ...
 } from '@angular/animations';
 
@@ -48,11 +49,28 @@ import {
         ]),
       ]),
     ]),
+    trigger('modalAnim', [
+      transition(':enter', [
+        sequence([
+          style({
+            height: '1px',
+            width: '10px'
+          }),
+          animate('1s', style({
+            height: '500px'
+          })),
+          animate('1s', style({
+            width: '700px'
+          }))
+        ])
+      ])
+    ])
   ]
 })
 export class LoginComponent implements OnInit {
 
   collapsed = false;
+  modalVisible = false;
 
   email: string;
   availableEmails: string[];
@@ -81,6 +99,12 @@ export class LoginComponent implements OnInit {
 
   toggle() {
     this.collapsed = !this.collapsed;
+  }
+
+  showModal($event: AnimationEvent) {
+    if ($event.toState === 'open') {
+      this.modalVisible = true;
+    }
   }
 
 }
