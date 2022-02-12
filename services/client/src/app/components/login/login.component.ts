@@ -19,14 +19,13 @@ import {
     trigger('openClose', [
       // ...
       state('open', style({
-        height: '200px',
+        width: '600px',
         opacity: 1,
-        backgroundColor: 'yellow'
+        backgroundColor: 'Red'
       })),
       state('closed', style({
-        height: '100px',
+        width: '45px',
         opacity: 0.8,
-        backgroundColor: 'blue'
       })),
       transition('open => closed', [
         animate('1s')
@@ -66,8 +65,8 @@ export class LoginComponent implements OnInit {
     // }
   }
 
-    toggle() {
-      this.collapsed = !this.collapsed;
-    }
+  toggle() {
+    this.collapsed = !this.collapsed;
+  }
 
 }

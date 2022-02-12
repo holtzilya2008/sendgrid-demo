@@ -18,6 +18,8 @@
     &__button {
       margin-left: 24px;
       margin-bottom: 18px;
+      overflow: hidden;
+      min-width: 5px !important;
 
       &__text {
         margin-left: 10px;
