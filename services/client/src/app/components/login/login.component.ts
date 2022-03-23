@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ComponentFactoryResolver, Injector, NgModuleRef, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { Router } from '@angular/router';
-import { filter, take } from 'rxjs/operators';
 import { UsersService } from 'src/app/services/users.service';
 import {
   trigger,
@@ -48,26 +47,12 @@ import {
           }))
         ]),
       ]),
-    ]),
-    trigger('modalAnim', [
-      transition(':enter', [
-        sequence([
-          style({
-            height: '1px',
-            width: '10px'
-          }),
-          animate('1s', style({
-            height: '500px'
-          })),
-          animate('1s', style({
-            width: '700px'
-          }))
-        ])
-      ])
     ])
   ]
 })
 export class LoginComponent implements OnInit {
+
+  @ViewChild("myContainer", { read: ViewContainerRef }) container: ViewContainerRef;
 
   collapsed = false;
   modalVisible = false;
@@ -76,7 +61,9 @@ export class LoginComponent implements OnInit {
   availableEmails: string[];
   isInitialized = false;
 
-  constructor(private userService: UsersService,
+  constructor(private cfr: ComponentFactoryResolver,
+              private injector: Injector,
+              private userService: UsersService,
               private router: Router) { }
 
   ngOnInit(): void {
@@ -101,10 +88,18 @@ export class LoginComponent implements OnInit {
     this.collapsed = !this.collapsed;
   }
 
-  showModal($event: AnimationEvent) {
+  async showModal($event: AnimationEvent) {
     if ($event.toState === 'open') {
-      this.modalVisible = true;
+      await this.getLazy();
     }
+  }
+
+  async getLazy() {
+    this.container.clear();
+    const { DynamicModalComponent } = await import('../dynamic-modal/dynamic-modal.component');
+    const componentRef = this.container.createComponent(
+      this.cfr.resolveComponentFactory(DynamicModalComponent), null, this.injector
+    );
   }
 
 }
